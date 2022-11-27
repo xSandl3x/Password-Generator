@@ -8,7 +8,6 @@ namespace PasswordGenerator
     public partial class MainWindow : Window
     {
         private Generator generator;
-
         private OptionsManager optionsManager;
 
         public MainWindow()
@@ -17,9 +16,10 @@ namespace PasswordGenerator
             this.optionsManager = generator.GetOptionsManager();
 
             this.InitializeComponent();
+            this.DefaultOptionsLoader();
         }
 
-        private void OnButtonClick(object sender, RoutedEventArgs e)
+        private void OnGenerateClick(object sender, RoutedEventArgs e)
         {
             Func<CheckBox, bool> optionValue = (checkbox) => checkbox.IsChecked.Value;
 
@@ -31,14 +31,27 @@ namespace PasswordGenerator
 
             if (options.Count == 0)
             {
-                errorMessage.Content = "Password could not be generated.";
+                actionMessage.Content = "Password could not be generated.";
                 return;
             }
 
             generator.Generate();
 
-            errorMessage.Content = "Password generated and copied.";
+            actionMessage.Content = "Password successfully generated.";
             resultLine.Text = generator.GetGeneratedPassword();
+        }
+
+        private void OnCopyClick(object sender, RoutedEventArgs e) 
+        {
+            if (string.IsNullOrEmpty(resultLine.Text)) 
+            {
+                actionMessage.Content = "Password could not be copied.";
+                return;
+            }
+
+            actionMessage.Content = "Password successfully copied.";
+
+            Clipboard.SetText(resultLine.Text);
         }
 
         private void OnSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -49,9 +62,10 @@ namespace PasswordGenerator
             generator.ChangeLength(length);
         }
 
-        private void OnTextBoxChanged(object sender, TextChangedEventArgs e)
+        private void DefaultOptionsLoader() 
         {
-            Clipboard.SetText(resultLine.Text);
+            grid.Children.OfType<CheckBox>().ToList()
+                .ForEach(options => options.IsChecked = true);
         }
     }
 }

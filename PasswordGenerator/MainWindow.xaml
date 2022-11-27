@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:PasswordGenerator"
         mc:Ignorable="d"
         Title="Password generator" Height="450" Width="800">
-    <Grid x:Name="TextBox1">
+    <Grid x:Name="grid">
         <Label Content="Password generator" HorizontalAlignment="Center" Margin="0,40,0,0" FontSize="20" FontWeight="DemiBold" VerticalAlignment="Top"/>
         <Label Content="Generate a complex and secure password" HorizontalAlignment="Center" Margin="0,80,0,0" FontSize="15" VerticalAlignment="Top"/>
         <Label x:Name="lengthMessage" Content="Length: " HorizontalAlignment="Center" Margin="0,210,0,0" FontSize="15" VerticalAlignment="Top"/>
-        <Label x:Name="errorMessage" Content="" HorizontalAlignment="Center" Margin="0,280,0,0" FontSize="12" VerticalAlignment="Top"/>
+        <Label x:Name="actionMessage" Content="" HorizontalAlignment="Center" Margin="0,280,0,0" FontSize="12" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="resultLine" HorizontalAlignment="Center" Height="25" Margin="0,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="260" FontSize="15" IsEnabled="False" TextChanged="OnTextBoxChanged"/>
+        <TextBox x:Name="resultLine" HorizontalAlignment="Center" Height="25" Margin="0,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="260" FontSize="15" IsEnabled="False"/>
 
         <CheckBox x:Name="checkBox" Content="Numbers" HorizontalAlignment="Left" Margin="270,160,0,0" VerticalAlignment="Top" FontSize="13"/>
         <CheckBox x:Name="checkBox2" Content="Characters" HorizontalAlignment="Center" Margin="0,160,0,0" VerticalAlignment="Top" FontSize="13"/>
@@ -20,6 +20,7 @@
 
         <Slider HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Minimum="4" Maximum="32" ValueChanged="OnSliderChanged" Width="230"/>
 
-        <Button Content="Generate" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" Background="LightYellow" Width="150" Height="35" Click="OnButtonClick"/>
+        <Button Content="Generate" HorizontalAlignment="Left" Margin="235,320,0,0" VerticalAlignment="Top" Background="LightYellow" Width="150" Height="35" Click="OnGenerateClick"/>
+        <Button Content="Copy" HorizontalAlignment="Right" Margin="0,320,235,0" VerticalAlignment="Top" Background="LightYellow" Width="150" Height="35" Click="OnCopyClick"/>
     </Grid>
 </Window>

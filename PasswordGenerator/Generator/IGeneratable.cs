@@ -1,7 +1,7 @@
 ﻿
 namespace PasswordGenerator
 {
-    interface Generatable
+    interface IGeneratable
     {
         void Generate();
     }

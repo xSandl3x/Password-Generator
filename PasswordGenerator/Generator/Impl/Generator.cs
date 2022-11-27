@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PasswordGenerator
 {
-    public sealed class Generator : Generatable
+    public sealed class Generator : IGeneratable
     {
         private int passwordLength;
 
