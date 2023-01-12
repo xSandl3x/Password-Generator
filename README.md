@@ -15,4 +15,4 @@ Password-Generator is an open-source project, that generates complex passwords.
  
  # ❓ Errors and Suggestions
  - You can submit a bug or suggestion here:
-   https://github.com/xSandlex/Password-Generator/issues/new
+   https://github.com/xSandl3x/Password-Generator/issues/new
