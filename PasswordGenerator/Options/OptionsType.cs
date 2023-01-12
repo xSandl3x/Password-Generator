@@ -3,7 +3,7 @@ namespace PasswordGenerator
 {
     public enum OptionsType
     {
-        NONE = 0,
+        OTHER,
         NUMBERS,
         SYMBOLS,
         CHARACTERS

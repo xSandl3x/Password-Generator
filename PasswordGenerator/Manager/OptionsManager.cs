@@ -5,11 +5,11 @@ namespace PasswordGenerator
 {
     public sealed class OptionsManager 
     {
-        private List<BaseOption> optionsList;
+        private List<BaseOption> _optionsList;
 
         public OptionsManager() 
         {
-            optionsList = new List<BaseOption>() 
+            _optionsList = new List<BaseOption>() 
             {
                 new CharactersOption(),
                 new NumbersOption(),
@@ -25,10 +25,10 @@ namespace PasswordGenerator
 
         public BaseOption SearchByType(OptionsType optionsType)
         {
-            return this.optionsList.Where(all => all.GetOptionsType().Equals(optionsType)).FirstOrDefault();
+            return _optionsList.Where(all => all.GetOptionsType().Equals(optionsType)).FirstOrDefault();
         }
 
-        public List<BaseOption> GetOptionsList() => this.optionsList;
+        public List<BaseOption> GetOptionsList() => _optionsList;
 
     }
 }

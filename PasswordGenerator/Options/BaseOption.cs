@@ -3,22 +3,22 @@ namespace PasswordGenerator
 {
     public class BaseOption
     {
-        private bool enable;
+        private bool _enable;
 
         public BaseOption()
         {
-            this.enable = false;
+            _enable = false;
         }
 
         public void SetEnable(bool enable) 
         {
-            this.enable = enable;
+            _enable = enable;
         }
 
-        public bool IsEnabled() => enable;
+        public bool IsEnabled() => _enable;
 
         public virtual string GetOptionDetails() => "Base option";
 
-        public virtual OptionsType GetOptionsType() => OptionsType.NONE;
+        public virtual OptionsType GetOptionsType() => OptionsType.OTHER;
     }
 }

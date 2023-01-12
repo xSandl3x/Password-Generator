@@ -6,30 +6,29 @@ namespace PasswordGenerator
 {
     public sealed class Generator : IGeneratable
     {
-        private int passwordLength;
+        private int _passwordLength;
+        private string _generatedPassword;
 
-        private string generatedPassword;
-
-        private OptionsManager optionsManager;
+        private OptionsManager _optionsManager;
 
         public Generator() 
         {
-            this.optionsManager = new OptionsManager();
-            this.passwordLength = 4;
+            _optionsManager = new OptionsManager();
+            _passwordLength = 4;
         }
 
         public void ChangeLength(int passwordLength)
         {
-            this.passwordLength = passwordLength;
+            _passwordLength = passwordLength;
         }
 
         public void Generate()
         {
             var rand = new Random();
             var stringBuilder = new StringBuilder();
-            var options = optionsManager.GetOptionsList().Where(all => all.IsEnabled()).ToList();
+            var options = _optionsManager.GetOptionsList().Where(all => all.IsEnabled()).ToList();
 
-            for (int i = 0; i < this.passwordLength; i++) 
+            for (int i = 0; i < _passwordLength; i++) 
             {
                 int optionId = rand.Next(options.Count);
 
@@ -43,11 +42,11 @@ namespace PasswordGenerator
                     stringBuilder.Append(details[detailsId]);
             }
 
-            this.generatedPassword = stringBuilder.ToString();
+            _generatedPassword = stringBuilder.ToString();
         }
 
-        public OptionsManager GetOptionsManager() => this.optionsManager;
+        public OptionsManager GetOptionsManager() => _optionsManager;
 
-        public string GetGeneratedPassword() => this.generatedPassword;
+        public string GetGeneratedPassword() => _generatedPassword;
     }
 }

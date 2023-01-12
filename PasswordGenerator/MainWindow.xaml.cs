@@ -7,27 +7,27 @@ namespace PasswordGenerator
 {
     public partial class MainWindow : Window
     {
-        private Generator generator;
-        private OptionsManager optionsManager;
+        private readonly Generator _generator;
+        private readonly OptionsManager _optionsManager;
 
         public MainWindow()
         {
-            this.generator = new Generator();
-            this.optionsManager = generator.GetOptionsManager();
+            _generator = new Generator();
+            _optionsManager = _generator.GetOptionsManager();
 
-            this.InitializeComponent();
-            this.DefaultOptionsLoader();
+            InitializeComponent();
+            DefaultOptionsLoader();
         }
 
         private void OnGenerateClick(object sender, RoutedEventArgs e)
         {
             Func<CheckBox, bool> optionValue = (checkbox) => checkbox.IsChecked.Value;
 
-            optionsManager.SetOption(OptionsType.NUMBERS, optionValue(checkBox));
-            optionsManager.SetOption(OptionsType.CHARACTERS, optionValue(checkBox2));
-            optionsManager.SetOption(OptionsType.SYMBOLS, optionValue(checkBox3));
+            _optionsManager.SetOption(OptionsType.NUMBERS, optionValue(checkBox));
+            _optionsManager.SetOption(OptionsType.CHARACTERS, optionValue(checkBox2));
+            _optionsManager.SetOption(OptionsType.SYMBOLS, optionValue(checkBox3));
 
-            var options = optionsManager.GetOptionsList().Where(all => all.IsEnabled()).ToList();
+            var options = _optionsManager.GetOptionsList().Where(all => all.IsEnabled()).ToList();
 
             if (options.Count == 0)
             {
@@ -35,10 +35,10 @@ namespace PasswordGenerator
                 return;
             }
 
-            generator.Generate();
+            _generator.Generate();
 
             actionMessage.Content = "Password successfully generated.";
-            resultLine.Text = generator.GetGeneratedPassword();
+            resultLine.Text = _generator.GetGeneratedPassword();
         }
 
         private void OnCopyClick(object sender, RoutedEventArgs e) 
@@ -51,7 +51,7 @@ namespace PasswordGenerator
 
             actionMessage.Content = "Password successfully copied.";
 
-            Clipboard.SetText(resultLine.Text);
+            Clipboard.SetDataObject(resultLine); // Clipboard#SetText never use!
         }
 
         private void OnSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -59,7 +59,7 @@ namespace PasswordGenerator
             int length = (int)e.NewValue;
 
             lengthMessage.Content = length;
-            generator.ChangeLength(length);
+            _generator.ChangeLength(length);
         }
 
         private void DefaultOptionsLoader() 
